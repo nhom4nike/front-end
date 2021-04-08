@@ -9,8 +9,7 @@
           "public": "./public",
           "components": "./src/components",
           "pages": "./src/pages",
-          "styles": "./src/styles",
-          "assets": "./src/assets"
+          "styles": "./src/styles"
         }
       }
     ]

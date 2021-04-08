@@ -25,7 +25,6 @@ module.exports = {
       components: path.resolve(__dirname, 'src/components'),
       pages: path.resolve(__dirname, 'src/pages'),
       styles: path.resolve(__dirname, 'src/styles'),
-      assets: path.resolve(__dirname, 'src/assets'),
     },
     extensions: ['.css', '.less', '.js', '.jsx'],
   },
