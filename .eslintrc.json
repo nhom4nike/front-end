@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest/globals": true
   },
   "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "parserOptions": {
@@ -16,7 +17,7 @@
       "babel-module": {}
     }
   },
-  "plugins": ["react", "module-resolver"],
+  "plugins": ["react", "module-resolver", "jest"],
   "rules": {
     "module-resolver/use-alias": 2
   }
