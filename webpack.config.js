@@ -64,7 +64,22 @@ module.exports = {
         },
       },
       {
-        test: /\.(less|css)$/,
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+        ],
+        // ...other rules
+      },
+      {
+        test: /\.less$/,
         use: [
           {
             loader: 'style-loader',
@@ -76,7 +91,7 @@ module.exports = {
             loader: 'less-loader', // compiles Less to CSS
             options: {
               lessOptions: {
-                // If you are using less-loader@5 please spread the lessOptions to options directly
+                // config antd theme here
                 modifyVars: {
                   'primary-color': '#1DA57A',
                   'link-color': '#1DA57A',

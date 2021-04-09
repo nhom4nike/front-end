@@ -19,6 +19,10 @@
   },
   "plugins": ["react", "module-resolver", "jest"],
   "rules": {
-    "module-resolver/use-alias": 2
+    "module-resolver/use-alias": 2,
+    "no-use-before-define": [
+      "error",
+      { "variables": true, "functions": false, "classes": false }
+    ]
   }
 }
