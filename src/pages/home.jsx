@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import styles from 'styles/home.module.css';
+import styles from '@/styles/home.module.css';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import { useHistory, useLocation } from 'react-router-dom';
 

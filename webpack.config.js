@@ -22,10 +22,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      public: path.resolve(__dirname, 'public'),
-      components: path.resolve(__dirname, 'src/components'),
-      pages: path.resolve(__dirname, 'src/pages'),
-      styles: path.resolve(__dirname, 'src/styles'),
+      '@/public': path.resolve(__dirname, 'public'),
+      '@/components': path.resolve(__dirname, 'src/components'),
+      '@/pages': path.resolve(__dirname, 'src/pages'),
+      '@/styles': path.resolve(__dirname, 'src/styles'),
     },
     extensions: ['.css', '.less', '.js', '.jsx'],
   },
@@ -51,11 +51,10 @@ module.exports = {
                 {
                   root: ['.'],
                   alias: {
-                    public: './public',
-                    components: './src/components',
-                    pages: './src/pages',
-                    styles: './src/styles',
-                    assets: './src/assets',
+                    '@/public': './public',
+                    '@/components': './src/components',
+                    '@/pages': './src/pages',
+                    '@/styles': './src/styles',
                   },
                 },
               ],

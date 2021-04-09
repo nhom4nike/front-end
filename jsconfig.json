@@ -3,11 +3,11 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "*": ["./*"],
-      "public/*": ["public/*"],
-      "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"],
-      "styles/*": ["src/styles/*"]
+      "@/*": ["./*"],
+      "@/public/*": ["public/*"],
+      "@/components/*": ["src/components/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/styles/*": ["src/styles/*"]
     }
   }
 }

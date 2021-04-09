@@ -14,10 +14,12 @@
 
 tham khảo app.jsx và index.jsx
 
-- `styles` -> `src/styles`
+- `@/styles` -> `src/styles`
 
-- `components` -> `src/components`
+- `@/components` -> `src/components`
 
-- `pages` -> `src/pages`
+- `@/pages` -> `src/pages`
 
-- `pages` -> `src/pages`
+- `@/` -> `./`
+
+- `@/public` -> `public`

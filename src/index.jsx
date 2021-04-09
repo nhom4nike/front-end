@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'src/pages/app';
+import App from '@/pages/app';
 import reportWebVitals from 'reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'antd/dist/antd.less';
-import 'styles/global.css';
+import '@/styles/global.css';
 
 ReactDOM.render(
   <React.StrictMode>
