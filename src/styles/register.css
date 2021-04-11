@@ -1,0 +1,34 @@
+.register {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  background-color: #ffffff;
+  background-image: url('/public/background.PNG');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.register__labelRegister {
+  text-align: center;
+}
+.register__labelInput {
+  margin-bottom: 5px;
+  display: inline-block;
+  width: 180px;
+}
+.register__form {
+  width: 400px;
+  flex: 1;
+  background-color: rgba(250, 250, 250, 0.8);
+  padding: 20px 20px 0 20px !important;
+  position: absolute;
+  top: 180px;
+}
+.register__button {
+  width: 100%;
+  background: blue !important;
+  text-align: center;
+  margin: 20px 0;
+  margin-bottom: 1.6rem;
+}
