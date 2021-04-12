@@ -21,9 +21,7 @@ export default function RegisterPage() {
         <Form.Item style={{ marginBottom: 0 }}>
           <Form.Item
             name="FisrtName"
-            rules={[
-              { required: true, message: 'Please input your first name' },
-            ]}
+            rules={[{ required: true, message: 'Hãy nhập họ và tên đệm!' }]}
             style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
           >
             <Input />
@@ -31,7 +29,7 @@ export default function RegisterPage() {
 
           <Form.Item
             name="LastName"
-            rules={[{ required: true, message: 'Please input your last name' }]}
+            rules={[{ required: true, message: 'Hãy nhập tên!' }]}
             style={{
               display: 'inline-block',
               width: 'calc(50% - 8px)',
@@ -48,11 +46,11 @@ export default function RegisterPage() {
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'Địa chỉ email không đúng!',
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: 'Hãy nhập email!',
             },
           ]}
         >
@@ -63,7 +61,7 @@ export default function RegisterPage() {
         <Form.Item style={{ marginBottom: 0 }}>
           <Form.Item
             name="Telephone"
-            rules={[{ required: true, message: 'Please input Telephone' }]}
+            rules={[{ required: true, message: 'Hãy nhập số điện thoại!' }]}
             style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
           >
             <Input />
@@ -71,7 +69,7 @@ export default function RegisterPage() {
 
           <Form.Item
             name="Position"
-            rules={[{ required: true, message: 'Please input your position' }]}
+            rules={[{ required: true, message: 'Hãy nhập chức vụ!' }]}
             style={{
               display: 'inline-block',
               width: 'calc(50% - 8px)',
@@ -82,7 +80,10 @@ export default function RegisterPage() {
           </Form.Item>
         </Form.Item>
         <p className="register__labelInput">Ngành nghề</p>
-        <Form.Item name="position" rules={[{ required: true }]}>
+        <Form.Item
+          name="position"
+          rules={[{ required: true, message: 'Hãy chọn ngành nghề!' }]}
+        >
           <Select placeholder="Chọn ngành nghề" allowClear>
             <Option value="IT">IT</Option>
             <Option value="SALE">Sale</Option>

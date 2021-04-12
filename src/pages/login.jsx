@@ -3,8 +3,8 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React from 'react';
 import '@/styles/login.css';
 import { Link } from 'react-router-dom';
-import Footer from '../components/footer';
-import Logo from '../components/logo';
+import Footer from '@/components/footer';
+import Logo from '@/components/logo';
 
 export default function LoginPage() {
   return (
@@ -19,7 +19,7 @@ export default function LoginPage() {
           <h1 className="login-labelLogin">Đăng Nhập</h1>
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            rules={[{ required: true, message: 'Hãy nhập Username!' }]}
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
@@ -28,7 +28,7 @@ export default function LoginPage() {
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your Password!' }]}
+            rules={[{ required: true, message: 'Hãy nhập Password!' }]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -38,13 +38,15 @@ export default function LoginPage() {
           </Form.Item>
 
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              Đăng nhập
-            </Button>
+            <Link to="/">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                Đăng nhập
+              </Button>
+            </Link>
 
             <p className="login-form-forgot">Bạn đã quên mật khẩu ?</p>
             <p className="login-regitser">

@@ -5,7 +5,7 @@
   position: relative;
   min-height: 100vh;
   background-color: #ffffff;
-  background-image: url('/public/background.PNG');
+  background-image: url('/public/background-register.PNG');
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -15,7 +15,7 @@
 .register__labelInput {
   margin-bottom: 5px;
   display: inline-block;
-  width: 180px;
+  min-width: 180px;
 }
 .register__form {
   width: 400px;
@@ -31,4 +31,8 @@
   text-align: center;
   margin: 20px 0;
   margin-bottom: 1.6rem;
+}
+.register__login {
+  text-align: center;
+  margin: 20px 0;
 }
