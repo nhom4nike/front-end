@@ -10,12 +10,8 @@ export default function LoginPage() {
   return (
     <div className="login">
       <Logo />
-      <div>
-        <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{ remember: true }}
-        >
+      <div className="login-form">
+        <Form name="normal_login" initialValues={{ remember: true }}>
           <h1 className="login-labelLogin">Đăng Nhập</h1>
           <Form.Item
             name="username"

@@ -19,18 +19,13 @@
 }
 .register__form {
   width: 400px;
-  flex: 1;
   background-color: rgba(250, 250, 250, 0.8);
-  padding: 20px 20px 0 20px !important;
-  position: absolute;
-  top: 180px;
+  padding: 20px;
 }
 .register__button {
   width: 100%;
   background: blue !important;
   text-align: center;
-  margin: 20px 0;
-  margin-bottom: 1.6rem;
 }
 .register__login {
   text-align: center;

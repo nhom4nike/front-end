@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import Footer from '@/components/footer';
 
 const RegisterNext = () => (
-    <div className="register">
-      <Logo />
-      <Form className="register__form">
+  <div className="register">
+    <Logo />
+    <div className="register__form">
+      <Form>
         <h1 className="register__labelRegister">Xác thực mật khẩu</h1>
         <p className="register__labelInput">Mật khẩu</p>
         <Form.Item
@@ -69,8 +70,9 @@ const RegisterNext = () => (
           </p>
         </Form.Item>
       </Form>
-      <Footer />
     </div>
-  );
+    <Footer />
+  </div>
+);
 
 export default RegisterNext;
