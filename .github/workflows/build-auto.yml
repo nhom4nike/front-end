@@ -81,5 +81,5 @@ jobs:
         PORT: ${{ secrets.SSH_PORT }}
         script: |
           cd /opt/fe-04-nike
-          echo IMAGE=${{ secrets.DOCKER_HUB_USERNAME }}/build-auto:${{ steps.vars.outputs.tag }} > .env
+          echo IMAGE=${{ secrets.DOCKER_HUB_USERNAME }}/fe-04-nike:${{ steps.vars.outputs.tag }} > .env
           docker-compose up -d
