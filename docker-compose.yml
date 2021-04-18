@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+
+  fe-04-nike:
+    container_name: fe-04-nike
+    build:
+      context: .
+    ports:
+      - '9008:80'   
