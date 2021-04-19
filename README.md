@@ -1,3 +1,16 @@
+# CICD
+
+- Push code lên nhánh `master`
+
+- Tất cả actions:
+  https://github.com/nhom4nike/front-end/actions
+
+- Link docker image:
+  https://hub.docker.com/repository/docker/04nike/fe-04-nike
+
+- Chạy tại:
+  https://fe.04-nike.tk/
+
 # Frontend
 
 ## Lưu ý

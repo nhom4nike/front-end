@@ -71,9 +71,11 @@ const CreateSignature = () => {
               />
               <ChooseSignatureItem
                 data={{ name: 'Nguyễn Văn A', initial: 'NA' }}
+                selected={false}
               />
               <ChooseSignatureItem
                 data={{ name: 'Nguyễn Văn A', initial: 'NA' }}
+                selected={false}
               />
             </>
           </TabPane>

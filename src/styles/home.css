@@ -1,0 +1,12 @@
+.home__content {
+  width: 100%;
+  height: calc(100vh - 84px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-theme='dark'] .siteLayoutContent {
+  background: #141414;
+}

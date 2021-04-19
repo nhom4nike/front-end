@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@\styles\home.module.css';
+import '@\styles\home.css';
 import ManipulationItem from '@\components\home\manipulation_item.jsx';
 import dataFeatures from '../contants/menu';
 import Header from '../components/header/header';
@@ -11,10 +11,10 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <div className={styles.home__content}>
+      <div className="home__content">
         {dataFeatures.map((element) => (
           <ManipulationItem
-            key={`manipulation${  element.route}`}
+            key={`manipulation${element.route}`}
             data={element}
           />
         ))}

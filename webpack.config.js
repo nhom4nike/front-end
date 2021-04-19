@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const path = require('path');
 
-const development = true || process.env.NODE_ENV !== 'production';
+const development = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   target: 'web', // что, черт возьми, идиот делает документацию, HMR не будет работать без этого поля
@@ -10,7 +10,8 @@ module.exports = {
     app: path.resolve(__dirname, 'src', 'index.jsx'),
   },
   output: {
-    filename: '[name].[fullhash].js',
+    // publicPath: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
