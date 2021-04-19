@@ -1,0 +1,348 @@
+.wrap {
+  width: '100%';
+  height: 84px;
+  background-color: #2f80ed;
+
+  padding: 0px 36px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .wrap-header__right {
+    display: flex;
+    align-items: center;
+
+    .btn-header-item {
+      width: 36px;
+      height: 36px;
+
+      background-color: rgba(255, 255, 255, 0);
+
+      margin-right: 24px;
+
+      border: 0;
+      border-radius: 50%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+
+  .wrap-header__left {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .btn-create-signature {
+      height: 48px;
+      background-color: rgba(255, 255, 255, 0);
+
+      margin-left: 24px;
+      padding: 0px 18px;
+
+      border: 1px solid #fff;
+      border-radius: 6px;
+
+      display: flex;
+      align-items: center;
+
+      cursor: pointer;
+
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      .btn-create-signature__label {
+        color: #fff;
+        font-weight: 500;
+      }
+
+      .btn-create-signature__content {
+        margin-left: 6px;
+        color: #fff;
+        font-family: 'Dancing Script', cursive;
+      }
+    }
+  }
+}
+
+.modal-create-signature {
+  width: 820px !important;
+  height: 520px;
+
+  .ant-modal-content {
+    width: 820px;
+    height: 520px;
+
+    .ant-modal-header {
+      border: 0;
+
+      .ant-modal-title {
+        font-size: 16px;
+        font-weight: 700;
+      }
+    }
+
+    .ant-modal-body {
+      padding: 0px 24px;
+
+      .name-and-initial {
+        display: flex;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #f1f1f1;
+
+        .name-item {
+          &:not(:first-child) {
+            margin-left: 18px;
+          }
+
+          .name-item__label {
+            margin-right: 12px;
+          }
+
+          .name-item__input {
+            height: 36px;
+            padding: 0px 12px;
+
+            border-radius: 3px;
+            border: 1px solid #ccc;
+
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      .tabs-choose-signature {
+        height: 356px;
+
+        .ant-tabs-tab-btn {
+          font-weight: 500;
+        }
+      }
+
+      .active {
+        .choose-signature-item__circle-1 {
+          border: 1px solid #2f80ed !important;
+
+          .choose-signature-item__circle-2 {
+            background-color: #2f80ed !important;
+          }
+        }
+      }
+
+      .choose-signature-item {
+        width: 100%;
+        height: 90px;
+
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
+
+        &:nth-child(2n + 1) {
+          background-color: #fafafa;
+        }
+
+        .choose-signature-item__check {
+          width: 30%;
+          padding-left: 18px;
+
+          .choose-signature-item__circle-1 {
+            width: 24px;
+            height: 24px;
+
+            border-radius: 50%;
+            border: 1px solid #ccc;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .choose-signature-item__circle-2 {
+              width: 12px;
+              height: 12px;
+              background-color: #fff;
+
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .choose-signature-item__inner {
+          width: 35%;
+
+          display: flex;
+          flex-direction: column;
+
+          .choose-signature-item__label {
+            font-size: 12px;
+            font-weight: 500;
+          }
+
+          .choose-signature-item__signature {
+            margin-top: 4px;
+
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Dancing Script', cursive;
+          }
+        }
+      }
+
+      .upload-signature {
+        width: 100%;
+        height: 280px;
+
+        display: flex;
+
+        .upload-signature-name {
+          width: 60%;
+          height: 100%;
+
+          label {
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            border-radius: 6px;
+            border: 1px dashed #f1f1f1;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+            p {
+              font-weight: 700;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+        }
+
+        .upload-signature-initial {
+          width: 40%;
+          height: 100%;
+
+          margin-left: 18px;
+
+          label {
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            border-radius: 6px;
+            border: 1px dashed #f1f1f1;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+            p {
+              font-weight: 700;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+        }
+      }
+
+      .draw-signature {
+        width: 100%;
+        height: 280px;
+
+        display: flex;
+
+        .draw-signature-name {
+          width: 60%;
+          height: 100%;
+
+          border: 1px dashed #f1f1f1;
+          border-radius: 6px;
+
+          position: relative;
+
+          canvas {
+            width: 100%;
+            height: 100%;
+          }
+
+          .draw-signature-name__label {
+            width: 80%;
+
+            padding: 12px;
+
+            border-top: 1px solid #8c8c8c;
+
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+
+            transform: translate(-50%, 0);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+              font-weight: 500;
+            }
+          }
+        }
+
+        .draw-signature-initial {
+          width: 40%;
+          height: 100%;
+          margin-left: 18px;
+
+          border: 1px dashed #f1f1f1;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
