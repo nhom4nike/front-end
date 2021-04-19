@@ -93,9 +93,9 @@ module.exports = {
               lessOptions: {
                 // config antd theme here
                 modifyVars: {
-                  'primary-color': '#1DA57A',
-                  'link-color': '#1DA57A',
-                  'border-radius-base': '2px',
+                  'primary-color': '#2F80ED',
+                  'link-color': '#2F80ED',
+                  'border-radius-base': '3px',
                 },
                 javascriptEnabled: true,
               },

@@ -20,6 +20,9 @@
   "plugins": ["react", "module-resolver", "jest"],
   "rules": {
     "module-resolver/use-alias": 2,
+    "import/no-unresolved": "off",
+    "no-useless-escape": "off",
+    "import/prefer-default-export": "off",
     "no-use-before-define": [
       "error",
       { "variables": true, "functions": false, "classes": false }
