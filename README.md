@@ -9,7 +9,7 @@
   https://hub.docker.com/repository/docker/04nike/fe-04-nike
 
 - Chạy tại:
-  https://fe.04-nike.tk/
+  https://04-nike.tk/
 
 # Frontend
 

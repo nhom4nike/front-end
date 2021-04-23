@@ -52,7 +52,7 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fe-04-nike:${{ steps.vars.outputs.tag }}
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/front-end:${{ steps.vars.outputs.tag }}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
@@ -80,6 +80,6 @@ jobs:
         KEY: ${{ secrets.SSH_KEY }}
         PORT: ${{ secrets.SSH_PORT }}
         script: |
-          cd /opt/fe-04-nike
-          echo IMAGE=${{ secrets.DOCKER_HUB_USERNAME }}/fe-04-nike:${{ steps.vars.outputs.tag }} > .env
+          cd /opt/04-nike/front-end
+          echo IMAGE=${{ secrets.DOCKER_HUB_USERNAME }}/front-end:${{ steps.vars.outputs.tag }} > .env
           docker-compose up -d
