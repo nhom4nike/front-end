@@ -1,0 +1,43 @@
+@import '@/styles/rootColor.scss';
+
+  .button {
+    font-family: Quicksand;
+    font-weight: bolder;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+  }
+  
+  .btn--primary {
+    background-color: $--primary;
+    color: $--white;
+    cursor: pointer;
+  }
+  
+  .btn--secondary {
+    background-color: $--white;
+    color: $--secondary;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+  }
+  
+  .btn--outline-primary {
+    background-color: $--white;
+    outline: 1px solid $--primary;
+    color: $--primary;
+    cursor: pointer;
+  }
+
+  .btn--outline-primary:hover{
+    background-color: $--primary;
+    color: $--white;
+  }
+
+  .btn--none{
+    border: none;
+    cursor: pointer;
+    background-color: $--white;
+    color: $--secondary;
+    &:hover{
+      background-color: $--light;
+    }
+  }

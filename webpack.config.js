@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -31,6 +32,9 @@ module.exports = {
     extensions: ['.css', '.less', '.js', '.jsx'],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: path.resolve(__dirname, 'public/lib'), to: 'lib' }],
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       favicon: path.resolve(__dirname, 'public/favicon.ico'),
@@ -104,6 +108,17 @@ module.exports = {
           },
         ],
         // ...other rules
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

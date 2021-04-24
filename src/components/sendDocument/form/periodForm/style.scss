@@ -1,0 +1,36 @@
+@import '@/styles/rootColor.scss';
+
+.period-form{
+    text-align: left;
+    padding: 1rem;
+    .step{
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        color: $--primary;
+        &__icon{
+            margin-right: 0.5rem;
+        }
+        &__text{
+            font-family: Quicksand;
+            font-weight: bold;    
+            margin: 0;        
+        }
+
+        &.step--disabled{
+            opacity: 0.5 !important;
+            color: $--dark;
+            
+        }
+    }
+    &__bar{
+        border-radius: 2.5px;
+        margin-left: 0.75rem;
+        height: 3rem;
+        width: 2px;
+        background-color: rgba($color: $--primary, $alpha: 0.5);
+        &.bar--disabled{
+            background-color: rgba($color: $--gray, $alpha: 0.2);
+        }
+    }
+}

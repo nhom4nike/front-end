@@ -1,0 +1,27 @@
+@import '@/styles/rootColor.scss';
+  
+.input-with-label{
+  font-family: Quicksand;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;
+  &__label{
+    text-align: start;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #8C8C8C;
+  }
+}
+
+.input-horizontal{
+  flex-direction: row;
+  align-items: center;
+  .input{
+    flex-grow: 1;
+    margin-left: 2rem;
+  }
+  label{
+    width: 15%;
+  }
+}

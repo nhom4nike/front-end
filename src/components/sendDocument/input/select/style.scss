@@ -1,0 +1,71 @@
+@import '@/styles/rootColor.scss';
+  
+.select{
+  font-family: Quicksand;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;
+  &__label{
+    text-align: start;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #595959;
+    opacity: 0.8;
+  }
+
+  .drop-down{
+    position: relative;
+    &__select{
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0.25rem;
+      border: 1px solid #bdbdbd;
+      line-height: 2.5rem;
+      padding: 0rem 0.5rem;
+      color: #595959;
+    }
+    &__list{
+      position: absolute;
+      border-radius: 0.25rem;
+      border: 1px solid #bdbdbd;
+      box-sizing: border-box;
+      color: #595959;
+      background-color: var(--white);
+      width: 100%;
+      bottom: 2.8rem;
+      left: 0rem;
+      z-index: 1;
+      max-height: 50vh;
+      overflow-y: auto;
+      &.Hidden{
+        display: none;
+      }
+    }
+
+    &__item{
+      line-height: 2.5rem;
+      border-bottom: 1px solid #bdbdbd;
+      cursor: pointer;
+      &:last-child{
+        border-bottom: none;
+      }
+      &:hover{
+        background-color: var(--light);
+      }
+    }
+  }
+}
+.select-horizontal{
+  flex-direction: row;
+  align-items: center;
+  .drop-down{
+    flex-grow: 1;
+    margin-left: 2rem;
+  }
+  label{
+    width: 15%;
+  }
+}
