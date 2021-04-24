@@ -136,7 +136,7 @@ export const EditDocForm = () => {
       iframeDoc.addEventListener('dragover', dropOver);
       iframeDoc.addEventListener('drop', (e) => {
         e.preventDefault();
-        drop(e, instanced);
+        drop(e, instance);
       });
     });
   }, []);
