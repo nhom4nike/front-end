@@ -1,9 +1,9 @@
 import React from 'react';
 import '@/styles/home.css';
 import ManipulationItem from '@/components/home/manipulation_item.jsx';
+import { Link } from 'react-router-dom';
 import dataFeatures from '../contants/menu';
 import Header from '../components/header/header';
-// import { useHistory, useLocation } from 'react-router-dom';
 
 export default function HomePage() {
   // const router = useHistory();
@@ -13,10 +13,12 @@ export default function HomePage() {
       <Header />
       <div className="home__content">
         {dataFeatures.map((element) => (
-          <ManipulationItem
-            key={`manipulation${element.route}`}
-            data={element}
-          />
+          <Link to={element.route} style={{ marginRight: '1rem' }}>
+            <ManipulationItem
+              key={`manipulation${element.route}`}
+              data={element}
+            />
+          </Link>
         ))}
       </div>
     </>

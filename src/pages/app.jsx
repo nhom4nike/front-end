@@ -1,9 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+
 import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
 import RegisterPage from '@/pages/register';
 import RegisterNext from '@/pages/registerNext';
+import { SendDocument } from '@/pages/sendDocument';
+import { PdfDocListProvider } from '../contants/contexts/pdfDocListContext';
 
 function App() {
   return (
@@ -16,6 +19,11 @@ function App() {
       </Route>
       <Route exact path="/">
         <HomePage />
+      </Route>
+      <Route path="/document/create">
+        <PdfDocListProvider>
+          <SendDocument />
+        </PdfDocListProvider>
       </Route>
       <Route path="/registernext">
         <RegisterNext />

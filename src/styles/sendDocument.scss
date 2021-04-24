@@ -1,0 +1,99 @@
+@import './rootColor.scss';
+
+.send-document{
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    &__content{
+        min-height: 0%;
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .left-block{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        border-right: 1px solid rgba($color: $--gray, $alpha: 0.2);
+        margin-right: 1rem;
+        .go-back{
+            margin: 1rem 0rem;
+            padding-left: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            &__icon{
+                margin-right: 0.5rem;
+                height: 2.5rem;
+                width: 2.5rem;
+                background-color: $--light;
+                border-radius: 50%;
+                padding-right: 3px;
+            }
+            &__text{
+                font-weight: bold;
+                font-size: 1.5rem;
+                font-family: Quicksand;
+                margin: 0;
+            }
+        }
+
+        &__period{
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+    }
+
+    .right-block{
+        position: relative;
+        height: 100%;
+        padding-right: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .main-step{
+            transition: all 1s;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0%;
+            &__step-name{
+                text-align: left;
+                font-size: 1.25rem;
+                margin: 0.75rem 0rem;
+                font-family: Quicksand;
+                font-weight: bold;
+                opacity: .8;
+            }
+    
+            &__step-content{
+                min-height: 0%;
+                flex-grow: 1;
+            }
+        }
+        
+        &__control-btn{
+            margin: 1rem 0rem;
+            display: flex;
+            justify-content: flex-end;
+            .button + .button{
+                margin-left: 1rem;
+            }
+
+            .button{
+                min-width: 5rem;
+            }
+        }
+    }
+
+    .footer{
+        position: static;
+        margin-top: 0rem;
+    }
+}

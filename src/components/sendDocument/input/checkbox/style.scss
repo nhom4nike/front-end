@@ -1,0 +1,32 @@
+@import '@/styles/rootColor.scss';
+
+.checkbox{
+    appearance: none;
+    margin-left: 1rem;
+    height: 1rem;
+    width: 2rem;
+    background-color: $--light;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    &::before{
+        transition: 0.2s;
+        position: absolute;
+        top: -0.25rem;
+        left: -0.1rem;
+        content: '';
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 0.75rem;
+        background-color: $--white;
+        box-shadow: 0rem 0rem 2px $--dark;
+    }
+    &:checked{
+        transition-delay: .15s;
+        background-color: $--primary;
+        &::before{
+            left: 0.6rem;
+        }
+    }
+}
