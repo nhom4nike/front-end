@@ -1,40 +1,32 @@
 import React from 'react';
 import ButtonFilter from '@/components/document/button_filter';
-import { Table, Menu } from 'antd';
-import '@/styles/document.css';
+import { Table , Empty } from 'antd';
+import '@/styles/document.scss';
+import PropTypes from 'prop-types';
 
-const data = [
+
+const menuList = [
   {
-    key: '1',
-    name: 'Untitled 3/25/2021 | 7:39:45 PM',
-    author: 'Nguyễn Văn A',
-    datacreate: '08:00 12-12-2021',
-    datechange: '08:00 12-12-2021',
+    atributeValue: 'used',
+    value: 'Sử dụng',
   },
   {
-    key: '2',
-    name: 'Untitled 3/25/2021 | 7:39:45 PM',
-    author: 'Nguyễn Văn A',
-    datacreate: '08:00 12-12-2021',
-    datechange: '08:00 12-12-2021',
+    atributeValue: 'review',
+    value: 'Xem lại',
   },
   {
-    key: '3',
-    name: 'Untitled 3/25/2021 | 7:39:45 PM',
-    author: 'Nguyễn Văn A',
-    datacreate: '08:00 12-12-2021',
-    datechange: '08:00 12-12-2021',
+    atributeValue: 'update',
+    value: 'Chỉnh sửa',
+  },
+  {
+    atributeValue: 'delete',
+    value: 'Xóa',
+  },
+  {
+    atributeValue: 'dowload',
+    value: 'Tải xuống',
   },
 ];
-const menu = (
-  <Menu>
-    <Menu.Item key="0">Sử dụng </Menu.Item>
-    <Menu.Item key="1">Xem lại</Menu.Item>
-    <Menu.Item key="2">Chỉnh sửa</Menu.Item>
-    <Menu.Item key="3">Xóa</Menu.Item>
-    <Menu.Item key="4">Tải xuống</Menu.Item>
-  </Menu>
-);
 const columns = [
   { title: 'Tên bản mẫu', dataIndex: 'name', key: 'name' },
   { title: 'Người tạo', dataIndex: 'author', key: 'author' },
@@ -43,19 +35,28 @@ const columns = [
   {
     title: 'Thao tác',
     key: 'operation',
-    render: () => <ButtonFilter title="Chọn thao tác" menu={menu} />,
+    render: () => (
+      <ButtonFilter title="Chọn thao tác" menu={menuList} isDisabled />
+    ),
   },
 ];
 
-const ListDocument = () => (
-    <div className="list-document">
+const ListDocument = ({ data }) => (
+  <div className="list-document">
+    {data.length > 0 ? (
       <Table
         className="components-table-demo-nested"
         columns={columns}
         dataSource={data}
         scroll={{ y: 240 }}
       />
-    </div>
-  );
+    ) : (
+      <Empty />
+    )}
+  </div>
+);
 
+ListDocument.propTypes = {
+  data: PropTypes.instanceOf(Array).isRequired,
+};
 export default ListDocument;

@@ -1,20 +1,22 @@
 import React from 'react';
-import { Button , Typography } from 'antd';
-import '@/styles/document.css';
-
+import { Button, Typography } from 'antd';
+import '@/styles/document.scss';
+import PropTypes from 'prop-types';
 
 const { Title } = Typography;
 
-const HeaderContent = () => (
-    <div className="header-content">
-      <span>
-        <Title level={4}>Bản mẫu của tôi</Title>
-        <p style={{ opacity: '0.6' }}>
-          Quản lý các bản mẫu đã tạo. Có thể thêm xóa sửa bản mẫu
-        </p>
-      </span>
-      <Button type="primary">Gửi bản mẫu</Button>
-    </div>
-  );
+const HeaderContent = ({ headerTitle }) => (
+  <div className="header-content">
+    <span>
+      <Title level={4}>{headerTitle.title}</Title>
+      <p style={{ opacity: '0.6' }}>{headerTitle.desciption}</p>
+    </span>
+    <Button type="primary">Gửi bản mẫu</Button>
+  </div>
+);
+
+HeaderContent.propTypes = {
+  headerTitle: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default HeaderContent;

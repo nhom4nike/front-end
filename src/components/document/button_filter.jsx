@@ -1,23 +1,28 @@
 import React from 'react';
-import { Dropdown, Button } from 'antd';
-import '@/styles/document.css';
-import { CaretDownOutlined } from '@ant-design/icons';
+import { Select } from 'antd';
+import '@/styles/document.scss';
 import PropTypes from 'prop-types';
 
-const ButtonFilter = ({ title, menu }) => (
-    <>
-      <Dropdown overlay={menu} trigger={['click']}>
-        <Button className="button-filter">
-          {title}
-          <CaretDownOutlined />
-        </Button>
-      </Dropdown>
-    </>
-  );
+const { Option } = Select;
 
+const ButtonFilter = ({ menu, isDisabled }) => (
+    <div>
+      <Select
+        defaultValue={menu[0].value}
+        style={{ width: 150 }}
+        disabled={!isDisabled}
+      >
+        {menu.map((element) => (
+          <Option value={element.atributeValue} key={element.atributeValue}>
+            {element.value}
+          </Option>
+        ))}
+      </Select>
+    </div>
+  );
 ButtonFilter.propTypes = {
-  title: PropTypes.string.isRequired,
-  menu: PropTypes.string.isRequired,
+  menu: PropTypes.instanceOf(Array).isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 export default ButtonFilter;
