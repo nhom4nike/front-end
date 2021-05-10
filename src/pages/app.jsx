@@ -5,6 +5,7 @@ import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
 import RegisterPage from '@/pages/register';
 import RegisterNext from '@/pages/registerNext';
+import ProfilePage from '@/pages/profile';
 import { SendDocument } from '@/pages/sendDocument';
 import { PdfDocListProvider } from '../contants/contexts/pdfDocListContext';
 
@@ -27,6 +28,9 @@ function App() {
       </Route>
       <Route path="/registernext">
         <RegisterNext />
+      </Route>
+      <Route path="/profile">
+        <ProfilePage />
       </Route>
     </Switch>
   );

@@ -2,12 +2,12 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React from 'react';
 import '@/styles/login.css';
-import { Link } from 'react-router-dom';
+import { Link , withRouter } from 'react-router-dom';
 import Footer from '@/components/footer';
 import Logo from '@/components/logo';
 
-export default function LoginPage() {
-  return (
+
+const LoginPage = ({ history }) => (
     <div className="login">
       <Logo />
       <div className="login-form">
@@ -39,6 +39,7 @@ export default function LoginPage() {
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"
+                onClick={() => history.push('/')}
               >
                 Đăng nhập
               </Button>
@@ -54,4 +55,5 @@ export default function LoginPage() {
       <Footer />
     </div>
   );
-}
+
+export default withRouter(LoginPage);

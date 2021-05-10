@@ -7,6 +7,8 @@ import { SelectFileForm } from '@/components/sendDocument/form/selectFileForm/Se
 import { SelectPartnerForm } from '@/components/sendDocument/form/selectPartnerForm/selectPartnerForm';
 import { SendMailForm } from '@/components/sendDocument/form/sendMailForm/sendMailForm';
 import { EditDocForm } from '@/components/sendDocument/form/editDocForm/EditDocForm';
+
+import ResultSend from '@/components/sendDocument/form/resultSend/resultSend';
 import Footer from '../components/footer';
 import Header from '../components/header/header';
 
@@ -15,6 +17,7 @@ const stepData = [
   'Chọn người nhận và cài đặt',
   'Ký tên và các thông tin khác',
   'Kiểm tra và gửi file',
+  'Kết quả gửi Email',
 ];
 
 export const SendDocument = () => {
@@ -28,7 +31,9 @@ export const SendDocument = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const sendMail = () => {};
+  const sendMail = () => {
+    setActiveStep(activeStep + 1);
+  };
 
   return (
     <>
@@ -60,6 +65,8 @@ export const SendDocument = () => {
                       return <EditDocForm />;
                     case 4:
                       return <SendMailForm />;
+                    case 5:
+                      return <ResultSend />;
                     default:
                       return <></>;
                   }

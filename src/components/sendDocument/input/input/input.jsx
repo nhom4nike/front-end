@@ -12,6 +12,8 @@ export default function Input({ type, value, placeHolder, iconStyle, name }) {
     setType(Type === 'password' ? 'text' : 'password');
   };
 
+  console.log(value);
+
   return (
     <div className="input">
       <div className="main-content">
@@ -26,7 +28,6 @@ export default function Input({ type, value, placeHolder, iconStyle, name }) {
           className="input__text"
           type={`${Type}`}
           placeholder={placeHolder}
-          value={value}
           name={name}
           id={`txt${name}`}
         />
