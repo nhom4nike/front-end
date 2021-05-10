@@ -6,7 +6,7 @@
   https://github.com/nhom4nike/front-end/actions
 
 - Link docker image:
-  https://hub.docker.com/repository/docker/04nike/fe-04-nike
+  https://hub.docker.com/repository/docker/04nike/front-end
 
 - Chạy tại:
   https://04-nike.tk/

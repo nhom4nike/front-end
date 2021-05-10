@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu, Dropdown, Avatar } from 'antd';
 import { LanguageIcon, SettingIcon } from '@/components/icons/icon';
+import { Link } from 'react-router-dom';
 
 const menu = (
   <Menu className="dropdown-profile">
@@ -12,8 +13,9 @@ const menu = (
     <Menu.Item key="0">
       <a href="/profile">Trang cá nhân</a>
     </Menu.Item>
-    <Menu.Item key="1">
-      <a href="https://www.aliyun.com">Đăng xuất</a>
+    <Menu.Divider />
+    <Menu.Item key="3" onClick={() => localStorage.setItem('isLogin', 'false')}>
+      <Link to="/login"> Đăng xuất </Link>
     </Menu.Item>
   </Menu>
 );

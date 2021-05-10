@@ -1,4 +1,8 @@
 .logo-main {
-  width: 180px;
-  object-fit: contain;
+  color: #2f80ed;
+  font-size: 2rem;
+  font-weight: 900;
+  position: absolute;
+  top: 10px;
+  left: 20px;
 }

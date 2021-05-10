@@ -1,0 +1,87 @@
+@import './rootColor.scss';
+.document {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    .content__left {
+      width: 25%;
+      border-right: 1px solid rgb(209 209 209);
+    }
+    .content__right {
+      width: 75%;
+    }
+  }
+}
+
+
+.document__back {
+  background-color: white;
+  height: 55px;
+  cursor: pointer;
+  p {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-align: center;
+    line-height: 55px;
+    margin-bottom: 0;
+  }
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 15px;
+  span p {
+    margin-bottom: 0;
+  }
+}
+
+.main_content {
+  padding: 0 40px;
+}
+.list-document {
+  margin-top: 15px;
+}
+.document .footer{
+  position: static;
+  margin-top: 0rem;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: rgba(47, 128, 237, 0.1) !important;
+  border:none !important;
+}
+.ant-select{
+color: rgba(47, 128, 237, 1) !important;
+}
+.go-back{
+  margin: 1rem 0rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &__icon{
+      margin-right: 0.5rem;
+      height: 2.5rem;
+      width: 2.5rem;
+      background-color: $--light;
+      border-radius: 50%;
+      padding-right: 3px;
+      text-align: center;
+  }
+  &__text{
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: Quicksand;
+      margin: 0;
+  }
+}
+
+

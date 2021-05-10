@@ -4,10 +4,7 @@
   flex-direction: column;
   position: relative;
   min-height: 100vh;
-  background-color: #ffffff;
-  background-image: url('/public/background-register.PNG');
-  background-repeat: no-repeat;
-  background-size: 100%;
+  justify-content: center;
 }
 .register__labelRegister {
   text-align: center;
@@ -15,19 +12,25 @@
 .register__labelInput {
   margin-bottom: 5px;
   display: inline-block;
-  min-width: 180px;
+  min-width: 50%;
 }
 .register__form {
-  width: 400px;
+  width: 450px;
   background-color: rgba(250, 250, 250, 0.8);
   padding: 20px;
+  margin: 20px 0 60px 0;
 }
 .register__button {
   width: 100%;
-  background: blue !important;
+  background: #2f80ed !important;
   text-align: center;
 }
 .register__login {
   text-align: center;
   margin: 20px 0;
+}
+.register__errorMessage {
+  color: red;
+  text-align: center;
+  font-size: 1rem;
 }
