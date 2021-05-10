@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Logo from '@/components/logo';
 import { Form, Input, Button } from 'antd';
 import '@/styles/register.css';
-import { Link , useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
 import UserApi from '../api/useAPI';
-
 
 const RegisterNext = () => {
   useEffect(() => {
@@ -72,7 +71,6 @@ const RegisterNext = () => {
             case 500:
               break;
             default:
-              
           }
         }
       }

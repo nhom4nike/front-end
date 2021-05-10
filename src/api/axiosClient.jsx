@@ -9,9 +9,10 @@ const axiosClient = axios.create({
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });
-axiosClient.interceptors.request.use(async (config) => 
-  // Handle token here ...
-   config
+axiosClient.interceptors.request.use(
+  async (config) =>
+    // Handle token here ...
+    config
 );
 axiosClient.interceptors.response.use(
   (response) => response,

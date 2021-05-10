@@ -1,10 +1,9 @@
 import React from 'react';
 import '@/styles/register.css';
 import { Form, Input, Button } from 'antd';
-import { useHistory , Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Footer from '../components/footer';
 import Logo from '../components/logo';
-
 
 export default function RegisterPage() {
   const history = useHistory();

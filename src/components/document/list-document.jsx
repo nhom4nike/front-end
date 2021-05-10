@@ -1,9 +1,8 @@
 import React from 'react';
 import ButtonFilter from '@/components/document/button_filter';
-import { Table , Empty } from 'antd';
+import { Table, Empty } from 'antd';
 import '@/styles/document.scss';
 import PropTypes from 'prop-types';
-
 
 const menuList = [
   {

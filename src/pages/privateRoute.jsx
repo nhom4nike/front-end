@@ -8,18 +8,18 @@ const PrivateRoute = ({
   pathNameRedirect,
   path,
 }) => (
-    <Route
-      path={path}
-      exact
-      render={() =>
-        localStorage.getItem(authen) === 'true' ? (
-          <Component />
-        ) : (
-          <Redirect to={pathNameRedirect} />
-        )
-      }
-    />
-  );
+  <Route
+    path={path}
+    exact
+    render={() =>
+      localStorage.getItem(authen) === 'true' ? (
+        <Component />
+      ) : (
+        <Redirect to={pathNameRedirect} />
+      )
+    }
+  />
+);
 
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,

@@ -5,6 +5,7 @@ import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
 import RegisterPage from '@/pages/register';
 import RegisterNext from '@/pages/registerNext';
+import ProfilePage from '@/pages/profile';
 import Document from '@/pages/document';
 import { SendDocument } from '@/pages/sendDocument';
 import { PdfDocListProvider } from '../contants/contexts/pdfDocListContext';
@@ -39,6 +40,9 @@ function App() {
       />
       <Route path="/document/list">
         <Document />
+      </Route>
+      <Route path="/profile">
+        <ProfilePage />
       </Route>
       <PrivateRoute
         component={HomePage}

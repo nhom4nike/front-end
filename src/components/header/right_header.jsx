@@ -4,12 +4,14 @@ import { LanguageIcon, SettingIcon } from '@/components/icons/icon';
 import { Link } from 'react-router-dom';
 
 const menu = (
-  <Menu>
-    <Menu.Item key="0">
-      <a href="https://www.antgroup.com">1st menu item</a>
-    </Menu.Item>
+  <Menu className="dropdown-profile">
     <Menu.Item key="1">
-      <a href="https://www.aliyun.com">2nd menu item</a>
+      <h3>Nguyễn Văn A</h3>
+      <span>nguyenvana@gmail.com</span>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="0">
+      <a href="/profile">Trang cá nhân</a>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item key="3" onClick={() => localStorage.setItem('isLogin', 'false')}>
@@ -33,6 +35,7 @@ const RightHeader = () => (
         style={{
           backgroundColor: '#EB5757',
           verticalAlign: 'middle',
+          cursor: 'pointer',
         }}
         size="large"
         gap={1}

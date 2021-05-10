@@ -2,11 +2,10 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import '@/styles/login.css';
-import { Link , useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
 import Logo from '@/components/logo';
 import UserApi from '../api/useAPI';
-
 
 export default function LoginPage() {
   useEffect(() => {
@@ -47,7 +46,6 @@ export default function LoginPage() {
             case 500:
               break;
             default:
-              
           }
         }
       }
@@ -61,6 +59,7 @@ export default function LoginPage() {
   function handleOnChangePassword(e) {
     setPassword(e.target.value);
   }
+
   return (
     <div className="login">
       <span className="logo">
