@@ -7,7 +7,7 @@
 
 `Testing`
 
-- Push code lên nhánh `master` , hệ thống sẽ tự động chạy và cập nhật server testing, xem chi tiết tại:
+- Push code lên nhánh `master` , hệ thống sẽ tự động chạy và cập nhật server testing, xem chi tiết tại: [![Testing](https://github.com/nhom4nike/front-end/actions/workflows/testing.yml/badge.svg)](https://github.com/nhom4nike/front-end/actions/workflows/testing.yml)
 
 - Link docker image:
   https://hub.docker.com/repository/docker/04nike/front-end
