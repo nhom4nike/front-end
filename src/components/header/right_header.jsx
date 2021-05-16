@@ -14,7 +14,14 @@ const menu = (
       <a href="/profile">Trang cá nhân</a>
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item key="3" onClick={() => localStorage.setItem('isLogin', 'false')}>
+    <Menu.Item
+      key="3"
+      onClick={() => {
+        localStorage.setItem('isLogin', 'false');
+        localStorage.setItem('privateKey', '');
+        localStorage.setItem('publicKey', '');
+      }}
+    >
       <Link to="/login"> Đăng xuất </Link>
     </Menu.Item>
   </Menu>

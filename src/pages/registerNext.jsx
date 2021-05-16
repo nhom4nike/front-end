@@ -4,7 +4,9 @@ import { Form, Input, Button } from 'antd';
 import '@/styles/register.css';
 import { Link, useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
+
 import UserApi from '../api/useAPI';
+import crypt from '../contants/crypt';
 
 const RegisterNext = () => {
   useEffect(() => {
@@ -14,12 +16,26 @@ const RegisterNext = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleGenerateKey = () => {
+    const hash = crypt.hash(password);
+    const key = crypt.generateKey();
+    const encrypt = crypt.encrypt(key.privateKey, password);
+
+    return {
+      hash,
+      publicKey: key.publicKey,
+      crypt: encrypt,
+    };
+  };
+
   function handleSubmitClick() {
     const dataSend = {
-      password,
+      ...handleGenerateKey(),
       email: localStorage.getItem('email'),
       username: localStorage.getItem('username'),
     };
+
     const fetchPostUser = async () => {
       try {
         const url = '/register';

@@ -2,14 +2,18 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import '@/styles/login.css';
+
 import { Link, useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
 import Logo from '@/components/logo';
 import UserApi from '../api/useAPI';
+import crypt from '../contants/crypt';
 
 export default function LoginPage() {
   useEffect(() => {
     localStorage.setItem('isLogin', 'false');
+    localStorage.setItem('privateKey', '');
+    localStorage.setItem('publicKey', '');
   });
   const history = useHistory();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -17,15 +21,23 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleDecryptPK = (secretKey, encrypted) => {
+    const decrypt = crypt.decrypt(encrypted, secretKey);
+    const key = crypt.keyFromPrivate(decrypt);
+    localStorage.setItem('privateKey', `${key.privateKey}`);
+    localStorage.setItem('publicKey', `${key.publicKey}`);
+  };
+
   function handleSubmitClick() {
     const fetchPostUser = async () => {
-      const data = { email, password };
+      const data = { email, hash: crypt.hash(password) };
       try {
         const url = '/login';
         const response = await UserApi.post(url, data);
         if (response.status) {
           switch (response.status) {
             case 200:
+              handleDecryptPK(password, response.data.crypt);
               localStorage.setItem('isLogin', 'true');
               history.push('/');
               break;
