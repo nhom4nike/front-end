@@ -29,6 +29,9 @@ module.exports = {
       '@/pages': path.resolve(__dirname, 'src/pages'),
       '@/styles': path.resolve(__dirname, 'src/styles'),
     },
+    fallback: {
+      crypto: false,
+    },
     extensions: ['.css', '.less', '.js', '.jsx'],
   },
   plugins: [
