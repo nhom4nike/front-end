@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/styles/register.css';
+import '@/styles/register.scss';
 import { Form, Input, Button } from 'antd';
 import { useHistory, Link } from 'react-router-dom';
 import Footer from '../components/footer';
@@ -31,7 +31,7 @@ export default function RegisterPage() {
           <p className="register__labelInput">Họ và tên đệm</p>
           <p className="register__labelInput">Tên</p>
 
-          <Form.Item style={{ marginBottom: 0 }}>
+          <Form.Item style={{ marginBottom: 24 }}>
             <Form.Item
               name="FisrtName"
               rules={[{ required: true, message: 'Hãy nhập họ và tên đệm!' }]}
@@ -48,7 +48,6 @@ export default function RegisterPage() {
               style={{
                 display: 'inline-block',
                 width: 'calc(50% - 8px)',
-                margin: '0 8px',
               }}
               onChange={(e) => handleOnChange('LastName', e.target.value)}
               initialValue={localStorage.getItem('LastName') || ''}
@@ -56,13 +55,13 @@ export default function RegisterPage() {
               <Input />
             </Form.Item>
           </Form.Item>
-          <p className="register__labelInput">Username</p>
+          <p className="register__labelInput">Tên đăng nhập</p>
           <Form.Item
             name="UserName"
             rules={[
               {
                 required: true,
-                message: 'Hãy nhập UserName',
+                message: 'Hãy nhập tên đăng nhập',
               },
             ]}
             onChange={(e) => handleOnChange('username', e.target.value)}
@@ -116,7 +115,6 @@ export default function RegisterPage() {
               style={{
                 display: 'inline-block',
                 width: 'calc(50% - 8px)',
-                margin: '0 8px',
               }}
               onChange={(e) => handleOnChange('Position', e.target.value)}
               initialValue={localStorage.getItem('Position') || ''}
@@ -147,10 +145,10 @@ export default function RegisterPage() {
             >
               Tiếp theo
             </Button>
-            <p className="register__login">
-              Bạn đã có tài khoản ?<Link to="/login"> Đăng nhập </Link>
-            </p>
           </Form.Item>
+          <p className="register__login">
+            Bạn đã có tài khoản ?<Link to="/login"> Đăng nhập </Link>
+          </p>
         </Form>
       </div>
       <Footer />

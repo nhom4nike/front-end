@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Logo from '@/components/logo';
 import { Form, Input, Button } from 'antd';
-import '@/styles/register.css';
+import '@/styles/register.scss';
 import { Link, useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
 
@@ -164,10 +164,10 @@ const RegisterNext = () => {
             >
               Đăng kí
             </Button>
-            <p className="register__login">
-              Bạn đã có tài khoản ?<Link to="/login"> Đăng nhập </Link>
-            </p>
           </Form.Item>
+          <p className="register__login">
+            Bạn đã có tài khoản ?<Link to="/login"> Đăng nhập </Link>
+          </p>
         </Form>
       </div>
       <Footer />
