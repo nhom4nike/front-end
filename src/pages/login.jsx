@@ -1,7 +1,7 @@
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
-import '@/styles/login.css';
+import '@/styles/login.scss';
 
 import { Link, useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
@@ -87,23 +87,23 @@ export default function LoginPage() {
           <h1 className="login-labelLogin">Đăng Nhập</h1>
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Hãy nhập Username!' }]}
+            rules={[{ required: true, message: 'Hãy nhập tên đăng nhập!' }]}
             onChange={handleOnChangeEmail}
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              placeholder="Tên đăng nhập"
             />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Hãy nhập Password!' }]}
+            rules={[{ required: true, message: 'Hãy nhập mật khẩu!' }]}
             onChange={handleOnChangePassword}
           >
             <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="Password"
+              placeholder="Mật khẩu"
             />
           </Form.Item>
           {showErrorMessage && (
