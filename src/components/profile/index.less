@@ -2,7 +2,7 @@
     display: flex;
 
     .wrap-menu-profile {
-        width: 320px;
+        width : 320px;
         height: calc(100vh - 84px);
 
         border-right: 1px solid #F1F1F1;
@@ -11,7 +11,7 @@
             padding: 24px;
             display: block;
 
-            display: flex;
+            display    : flex;
             align-items: center;
 
             svg {
@@ -20,7 +20,7 @@
 
             span {
                 margin-left: 12px;
-                color: #8c8c8c;
+                color      : #8c8c8c;
                 font-weight: 600;
             }
 
@@ -31,6 +31,7 @@
 
         .active-link {
             background-color: #F5F9FE;
+
             svg {
                 fill: #2F80ed;
             }
@@ -42,20 +43,20 @@
     }
 
     .profile--content {
-        width: calc(100% - 320px);
+        width  : calc(100% - 320px);
         padding: 36px;
 
         .info-user {
             .info-user--head {
-                display: flex;
+                display        : flex;
                 justify-content: space-between;
 
                 padding-bottom: 24px;
-                border-bottom: 1px solid #F1F1F1;
+                border-bottom : 1px solid #F1F1F1;
 
                 .info-user--head--right {
                     span {
-                        width: 480px;
+                        width  : 480px;
                         display: block;
                     }
                 }
@@ -68,21 +69,66 @@
                     display: flex;
 
                     padding: 18px 0px;
+
                     .info-user-item--label {
-                        width: 300px;
-                        color: #8c8c8c;
+                        width      : 300px;
+                        color      : #8c8c8c;
                         font-weight: 500;
-                        display: block;
+                        display    : block;
                     }
 
                     .info-user-item--value {
                         margin-left: 36px;
-                        color: #595959;
+                        color      : #595959;
                         font-weight: 500;
                     }
                 }
             }
         }
     }
-    
+
 }
+
+.change-password__form {
+    width: 640px;
+    //background-color: rgba(250, 250, 250, 0.8);
+    padding: 20px;
+
+
+    .ant-row.ant-form-item {
+        align-items: center;
+
+        .ant-col.ant-col-8.ant-form-item-label {
+            display: flex;
+            justify-content: flex-start;
+            font-weight: 500;
+        }
+    }
+  
+    .ant-form-item-control-input {
+      min-height: 50px;
+  
+      .ant-form-item-control-input-content {
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+  
+        .ant-input-affix-wrapper {
+          height: 50px;
+          border-radius: 6px;
+        }
+  
+        .ant-input {
+          //height: 50px;
+          border-radius: 6px;
+        }
+
+        button {
+            height: 50px;
+
+            border-radius: 6px;
+            font-weight: 500;
+        }
+      }
+    }
+  }
