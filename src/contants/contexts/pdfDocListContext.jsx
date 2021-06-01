@@ -6,14 +6,19 @@ export const pdfDocListContext = React.createContext();
 
 export const PdfDocListProvider = ({ children }) => {
   const [pdfDocList, setPdfDocList] = useState([]);
-
+  const [partners, setPartners] = useState([]);
   const setDocList = (value) => {
     setPdfDocList(value);
+  };
+  const setPartnerList = (value) => {
+    setPartners(value);
   };
 
   const exportContext = {
     pdfDocList,
     setPdfDocList: setDocList,
+    partners,
+    setPartners: setPartnerList,
   };
 
   return (

@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 
 const iconStylePassword = ['eye', 'eye-slash'];
 
-export default function Input({ type, value, placeHolder, iconStyle, name }) {
+export default function Input({
+  type,
+  value,
+  placeHolder,
+  iconStyle,
+  name,
+  onChange,
+}) {
   const [Type, setType] = useState(type);
   const flag = type === 'password';
 
@@ -25,6 +32,8 @@ export default function Input({ type, value, placeHolder, iconStyle, name }) {
           />
         )}
         <input
+          value={value}
+          onChange={onChange}
           className="input__text"
           type={`${Type}`}
           placeholder={placeHolder}

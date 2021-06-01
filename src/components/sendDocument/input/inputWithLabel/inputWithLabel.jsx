@@ -11,12 +11,14 @@ export const InputWithLabel = ({
   placeHolder,
   value,
   children,
+  onChange,
 }) => (
   <div className={`input-with-label ${className}`}>
     <label className="input-with-label__label" htmlFor={`txt${name}`}>
       {labelName}
     </label>
     <Input
+      onChange={onChange}
       type={type}
       name={name}
       placeHolder={placeHolder}

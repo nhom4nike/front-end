@@ -1,6 +1,6 @@
 import '@/styles/sendDocument.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/sendDocument/input/button/button';
 import { PeriodForm } from '@/components/sendDocument/form/periodForm/periodForm';
 import { SelectFileForm } from '@/components/sendDocument/form/selectFileForm/SelectFileForm';
@@ -22,12 +22,16 @@ const stepData = [
 
 export const SendDocument = () => {
   const [activeStep, setActiveStep] = useState(1);
-
+  useEffect(() => {
+    setActiveStep(+localStorage.getItem('activeStepSendDoc'));
+  }, []);
   const nextStep = () => {
+    localStorage.setItem('activeStepSendDoc', activeStep + 1);
     setActiveStep(activeStep + 1);
   };
 
   const prevStep = () => {
+    localStorage.setItem('activeStepSendDoc', activeStep + 1);
     setActiveStep(activeStep - 1);
   };
 

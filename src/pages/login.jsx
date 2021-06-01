@@ -10,11 +10,6 @@ import UserApi from '../api/useAPI';
 import crypt from '../contants/crypt';
 
 export default function LoginPage() {
-  useEffect(() => {
-    localStorage.setItem('isLogin', 'false');
-    localStorage.setItem('privateKey', '');
-    localStorage.setItem('publicKey', '');
-  });
   const history = useHistory();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,6 +22,21 @@ export default function LoginPage() {
     localStorage.setItem('privateKey', `${key.privateKey}`);
     localStorage.setItem('publicKey', `${key.publicKey}`);
   };
+  useEffect(() => {
+    // -- new --
+    localStorage.setItem('isLogin', 'true');
+    handleDecryptPK(
+      '12345678zZ@',
+      'U2FsdGVkX183E5jD9xFq9pTTDZQqQLuCMCDpG9n7qC+6aYoPDlRFzva/3h1hjNFJ12PqhZtmzBCEa3lNvk2rlRUEMg556+pVkZAJqjeRP8kId67w6XQLTZc5K76zqwLS'
+    );
+    history.push('/');
+    //
+    /*
+    localStorage.setItem('isLogin', 'false');
+    localStorage.setItem('privateKey', '');
+    localStorage.setItem('publicKey', '');
+    */
+  });
 
   function handleSubmitClick() {
     const fetchPostUser = async () => {
