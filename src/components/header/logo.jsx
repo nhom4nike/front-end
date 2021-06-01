@@ -1,5 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Logo = () => <span className="logo">NikeSign</span>;
+const Logo = () => (
+  <Link to="/">
+    <span className="logo">NikeSign</span>
+  </Link>
+);
 
 export default Logo;

@@ -1,14 +1,28 @@
+# Login
+
+- email: doancnpmnhomnike@gmail.com
+- Password: 12345678zZ@
+
 # CICD
 
-- Push code lên nhánh `master`
+`Testing`
 
-- Tất cả actions:
-  https://github.com/nhom4nike/front-end/actions
+- Push code lên nhánh `master` , hệ thống sẽ tự động chạy và cập nhật server testing, xem chi tiết tại: [![Testing](https://github.com/nhom4nike/front-end/actions/workflows/testing.yml/badge.svg)](https://github.com/nhom4nike/front-end/actions/workflows/testing.yml)
 
 - Link docker image:
-  https://hub.docker.com/repository/docker/04nike/fe-04-nike
+  https://hub.docker.com/repository/docker/04nike/front-end
 
-- Chạy tại:
+- Testing URL:
+  https://test.04-nike.tk/
+
+`Deployment`
+
+- Sau khi chạy server testing ổn thì chấp nhập deploy lên production tại: [![Deployment](https://github.com/nhom4nike/front-end/actions/workflows/deployment.yml/badge.svg)](https://github.com/nhom4nike/front-end/actions/workflows/deployment.yml)
+
+- Link docker image:
+  https://hub.docker.com/repository/docker/04nike/front-end
+
+- Production URL:
   https://04-nike.tk/
 
 # Frontend
