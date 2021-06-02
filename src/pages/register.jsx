@@ -122,20 +122,6 @@ export default function RegisterPage() {
               <Input />
             </Form.Item>
           </Form.Item>
-          {/* <p className="register__labelInput">Ngành nghề</p> */}
-          {/* <Form.Item
-            name="job"
-            rules={[{ required: true, message: 'Hãy chọn ngành nghề!' }]}
-          >
-            <Select
-              onChange={(value) => handleOnChange("job",value)}
-              allowClear
-            >
-              <Option value="IT">IT</Option>
-              <Option value="SALE">Sale</Option>
-              <Option value="other">Other</Option>
-            </Select>
-          </Form.Item> */}
 
           <Form.Item>
             <Button

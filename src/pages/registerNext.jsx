@@ -18,12 +18,12 @@ const RegisterNext = () => {
   const [password, setPassword] = useState('');
 
   const handleGenerateKey = () => {
-    const hash = crypt.hash(password);
+    const hashPassword = crypt.hash(password);
     const key = crypt.generateKey();
     const encrypt = crypt.encrypt(key.privateKey, password);
 
     return {
-      hash,
+      password: hashPassword,
       publicKey: key.publicKey,
       crypt: encrypt,
     };
@@ -34,6 +34,10 @@ const RegisterNext = () => {
       ...handleGenerateKey(),
       email: localStorage.getItem('email'),
       username: localStorage.getItem('username'),
+      firstName: localStorage.getItem('FisrtName'),
+      lastName: localStorage.getItem('LastName'),
+      telephone: localStorage.getItem('Telephone'),
+      position: localStorage.getItem('Position'),
     };
 
     const fetchPostUser = async () => {
@@ -109,7 +113,7 @@ const RegisterNext = () => {
             name="password"
             rules={[
               {
-                pattern: /(?=.*[a-z][A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,16})/,
+                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!#%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                 message: 'Mật khẩu không đủ mạnh!',
               },
               {
