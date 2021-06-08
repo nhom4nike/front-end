@@ -20,6 +20,7 @@ const menu = (
         localStorage.setItem('isLogin', 'false');
         localStorage.setItem('privateKey', '');
         localStorage.setItem('publicKey', '');
+        localStorage.setItem('email', '');
       }}
     >
       <Link to="/login"> Đăng xuất </Link>

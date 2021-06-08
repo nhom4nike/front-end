@@ -1,6 +1,7 @@
 @import './rootColor.scss';
 
 .send-document{
+    overflow-y: hidden;
     font-size: 12px;
     text-align: center;
     display: flex;

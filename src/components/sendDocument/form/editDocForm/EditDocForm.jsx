@@ -1,31 +1,46 @@
 // @flow
 import './style.scss';
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext, useReducer } from 'react';
+
 import WebViewer from '@pdftron/webviewer';
 import { pdfDocListContext } from '../../../../contants/contexts/pdfDocListContext';
+import { Select } from '../../input/select/select';
+import { editDocReducer, editDocAction } from './reducer/editDocReducer';
 
 const TYPE = {
+  DATE: 'DATE_TIME',
   TEXT: 'TEXT',
   SIGN: 'SIGNATURE',
 };
 
+const init = {
+  mailSelected: 0,
+  authors: [localStorage.getItem('email')],
+  dropPoint: null,
+  currentDocShow: 0,
+};
 export const EditDocForm = () => {
-  const { pdfDocList, setPdfDocList } = useContext(pdfDocListContext);
-  const [dropPoint, setDropPoint] = useState(null);
-  const [currentDocShow, setCurrentDocShow] = useState(0);
-  const [instanced, setInstanced] = useState(null);
+  const {
+    removeListFieldDocs,
+    updateListFieldDocs,
+    fieldDocs,
+    sendDocument,
+    dispatch,
+    actionType,
+    instanced,
+    setInstanced,
+  } = useContext(pdfDocListContext);
+  const [editDoc, editDocDispatch] = useReducer(editDocReducer, init);
   const viewer = useRef(null);
 
   const drop = (e, instance) => {
-    // set pointDrop;
-    const { docViewer } = instance;
-    // post = scroll + e.page;
-
-    const scrollView = docViewer.getScrollViewElement();
-    const posScrollLeft = scrollView.scrollLeft || 0;
-    const posScrollTop = scrollView.scrollTop || 0;
-    setDropPoint({ x: e.pageX + posScrollLeft, y: e.pageY + posScrollTop });
-    e.preventDefault();
+    editDocDispatch({
+      type: editDocAction.EDIT_DROPPOINT,
+      payload: {
+        docViewer: instance.docViewer,
+        e,
+      },
+    });
     return false;
   };
 
@@ -34,79 +49,34 @@ export const EditDocForm = () => {
     return true;
   };
 
-  const dragStart = (e) => {
-    e.target.style.opacity = 0.3;
-
-    const divDrag = document.createElement('div');
-    divDrag.className = 'form-drag';
-    divDrag.id = 'form-drag';
-    const title = document.createElement('span');
-    const icon = document.createElement('i');
-    title.innerHTML = 'Ký tên';
-    icon.className = 'fa fa-pencil fa-lg';
-    divDrag.appendChild(title);
-    divDrag.appendChild(icon);
-    document.body.appendChild(divDrag);
-
-    e.dataTransfer.setDragImage(divDrag, 80, 28);
+  const dragStart = (e, text) => {
+    editDocDispatch({
+      type: editDocAction.DRAG_FIELD,
+      payload: { e, text },
+    });
   };
 
-  const addField = (type, point = {}) => {
-    const { docViewer, Annotations } = instanced;
-    const annotManager = docViewer.getAnnotationManager();
-    // const doc = docViewer.getDocument();
-    const displayMode = docViewer.getDisplayModeManager().getDisplayMode();
-    const page = displayMode.getSelectedPages(point, point);
+  const dragEnd = (e, type, content) => {
+    editDocDispatch({
+      type: editDocAction.ADD_FIELD,
+      payload: { instanced, type, content, updateListFieldDocs },
+    });
 
-    if (page.first === null) {
-      return;
-    }
-
-    const pageIndex = page.first;
-    // const pageInfo = doc.getPageInfo(pageIndex);
-    const pagePoint = displayMode.windowToPage(point, pageIndex);
-    // pagePoint fix positionWindow -> positonPage
-    // const zoom = docViewer.getZoom();
-
-    const newAnnot = new Annotations.FreeTextAnnotation();
-    newAnnot.PageNumber = pageIndex;
-    newAnnot.Rotation = docViewer.getCompleteRotation(pageIndex) * 90;
-
-    newAnnot.setWidth(newAnnot.Rotation === 90 ? 50 : 250);
-    newAnnot.setHeight(newAnnot.Rotation === 90 ? 250 : 50);
-
-    newAnnot.X = pagePoint.x - newAnnot.getWidth() / 2;
-    newAnnot.Y = pagePoint.y - newAnnot.getHeight() / 2;
-
-    newAnnot.setPadding(new Annotations.Rect(0, 0, 0, 0));
-    newAnnot.customs = {
-      // add more info
-      type,
-    };
-    newAnnot.setContents('_DIGITAL_SIGNATURE');
-    newAnnot.FontSize = `${20.0}px`;
-    newAnnot.FillColor = new Annotations.Color(23, 162, 184, 1);
-    newAnnot.TextColor = new Annotations.Color(255, 255, 255, 1);
-    newAnnot.StrokeThickness = 1;
-    newAnnot.StrokeColor = new Annotations.Color(0, 165, 228);
-    newAnnot.TextAlign = 'center';
-
-    annotManager.deselectAllAnnotations();
-    annotManager.addAnnotation(newAnnot, true);
-    annotManager.redrawAnnotation(newAnnot);
-    annotManager.selectAnnotation(newAnnot);
-  };
-
-  const dragEnd = (e, type) => {
-    addField(type, dropPoint);
     e.target.style.opacity = 1;
     document.body.removeChild(document.getElementById('form-drag'));
     e.preventDefault();
   };
 
   useEffect(() => {
+    editDocDispatch({
+      type: editDocAction.INIT,
+      payload: {
+        partners: [...sendDocument.partners.map((partner) => partner.email)],
+      },
+    });
     WebViewer(
       {
+        extension: 'pdf',
         path: '/lib',
         disabledElements: [
           'viewControlsButton',
@@ -129,8 +99,19 @@ export const EditDocForm = () => {
       viewer.current
     ).then((instance) => {
       setInstanced(instance);
-      const { iframeWindow } = instance;
+      const { iframeWindow, Annotations } = instance;
+      Annotations.SignatureWidgetAnnotation.prototype.createSignHereElement = function () {
+        const div = document.createElement('div');
+        div.style.width = '100%';
+        div.style.height = '100%';
+        div.style.cursor = 'pointer';
 
+        const inlineSvg =
+          '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 25.588 25.588" style="enable-background:new 0 0 25.588 25.588; width: 100%; height: 100%; transform: translateX(-35%);" xml:space="preserve"><g><path style="fill:#030104;" d="M18.724,9.903l3.855,1.416l-3.206,8.729c-0.3,0.821-1.927,3.39-3.06,3.914l-0.275,0.75c-0.07,0.19-0.25,0.309-0.441,0.309c-0.054,0-0.108-0.01-0.162-0.029c-0.243-0.09-0.369-0.359-0.279-0.604l0.26-0.709c-0.575-1.117-0.146-4.361,0.106-5.047L18.724,9.903z M24.303,0.667c-1.06-0.388-2.301,0.414-2.656,1.383l-2.322,6.326l3.854,1.414l2.319-6.325C25.79,2.673,25.365,1.056,24.303,0.667z M17.328,9.576c0.108,0.04,0.219,0.059,0.327,0.059c0.382,0,0.741-0.234,0.882-0.614l2.45-6.608c0.181-0.487-0.068-1.028-0.555-1.208c-0.491-0.178-1.028,0.068-1.209,0.555l-2.45,6.608C16.592,8.855,16.841,9.396,17.328,9.576z M13.384,21.967c-0.253-0.239-0.568-0.537-1.078-0.764c-0.42-0.187-0.829-0.196-1.128-0.203c-0.031,0-0.067-0.001-0.103-0.002c-0.187-0.512-0.566-0.834-1.135-0.96c-0.753-0.159-1.354,0.196-1.771,0.47c0.037-0.21,0.098-0.46,0.143-0.64c0.144-0.58,0.292-1.18,0.182-1.742c-0.087-0.444-0.462-0.774-0.914-0.806c-1.165-0.065-2.117,0.562-2.956,1.129c-0.881,0.595-1.446,0.95-2.008,0.749c-0.686-0.244-0.755-2.101-0.425-3.755c0.295-1.49,0.844-4.264,2.251-5.524c0.474-0.424,1.16-0.883,1.724-0.66c0.663,0.26,1.211,1.352,1.333,2.653c0.051,0.549,0.53,0.952,1.089,0.902c0.55-0.051,0.954-0.539,0.902-1.089c-0.198-2.12-1.192-3.778-2.593-4.329C6.058,7.07,4.724,6.982,3.107,8.429c-1.759,1.575-2.409,4.246-2.88,6.625c-0.236,1.188-0.811,5.13,1.717,6.029c1.54,0.549,2.791-0.298,3.796-0.976c0.184-0.124,0.365-0.246,0.541-0.355c-0.167,0.725-0.271,1.501,0.167,2.155c0.653,0.982,1.576,1.089,2.742,0.321c0.045-0.029,0.097-0.063,0.146-0.097c0.108,0.226,0.299,0.475,0.646,0.645c0.42,0.206,0.84,0.216,1.146,0.224c0.131,0.003,0.31,0.007,0.364,0.031c0.188,0.083,0.299,0.185,0.515,0.389c0.162,0.153,0.333,0.312,0.55,0.476c0.18,0.135,0.39,0.199,0.598,0.199c0.304,0,0.605-0.139,0.801-0.4c0.331-0.442,0.241-1.069-0.201-1.4C13.61,22.183,13.495,22.072,13.384,21.967z"/></g></svg>';
+        div.innerHTML = inlineSvg;
+
+        return div;
+      };
       const iframeDoc = iframeWindow.document.body;
 
       iframeDoc.addEventListener('dragover', dropOver);
@@ -142,117 +123,78 @@ export const EditDocForm = () => {
   }, []);
 
   useEffect(() => {
-    if (instanced && pdfDocList.length > -1) {
-      const { docViewer } = instanced;
-      docViewer.loadDocument(
-        pdfDocList.length > 0 ? pdfDocList[currentDocShow].data : null
-      );
-    }
-  }, [instanced, pdfDocList, currentDocShow]);
+    editDocDispatch({
+      type: editDocAction.LOAD_DOC,
+      payload: {
+        instanced,
+        sendDocument,
+        fieldDocs,
+        current: editDoc.currentDocShow,
+      },
+    });
+  }, [instanced, sendDocument.pdfDocList, editDoc.currentDocShow]);
 
-  /*
-    const applyAnnot = async () => {
-        const { Annotations, docViewer } = instance;
-        const annotManager = docViewer.getAnnotationManager();
-        const fieldManager = annotManager.getFieldManager();
-        const annotationsList = annotManager.getAnnotationsList();
-        const annotsToDelete = [];
-        const annotsToDraw = [];
-
-        annotationsList.forEach((annot, index) => {
-            let applyAnnot;
-            let field;
-            if (typeof(annot.customs) === 'undefined') return;
-            switch (annot.customs.type) {
-                case TYPE.TEXT:
-                    field = new Annotations.Forms.Field(annot.getContents() + index, {
-                        type: 'Tx',
-                        value: '',
-                    });
-                    applyAnnot = new Annotations.TextWidgetAnnotation(field);
-                    break;
-            }
-            applyAnnot.PageNumber = annot.getPageNumber();
-            applyAnnot.X = annot.getX();
-            applyAnnot.Y = annot.getY();
-
-            applyAnnot.rotation = annot.Rotation;
-            console.log(annot.getWidth(), annot.getHeight())
-            console.log(applyAnnot.rotation);
-            applyAnnot.setWidth((applyAnnot.rotation === 90)? annot.getHeight() :annot.getWidth());
-            applyAnnot.setHeight((applyAnnot.rotation === 90)? annot.getWidth(): annot.getHeight());
-
-            // customize styles of the form field
-            Annotations.WidgetAnnotation.getCustomStyles = function (widget) {
-                if (widget instanceof Annotations.TextWidgetAnnotation) {
-                  return {
-                    'background-color': '#007bff',
-                    color: 'white',
-                    'font-size': '20px',
-                    padding: '0.5rem'
-                  };
-                }
-              };
-            Annotations.WidgetAnnotation.getCustomStyles(applyAnnot);
-            annotsToDelete.push(annot);
-            annotManager.addAnnotation(applyAnnot);
-            fieldManager.addField(field);
-            annotsToDraw.push(applyAnnot);
-        })
-        annotManager.deleteAnnotations(annotsToDelete, { force: true });
-
-        annotManager.drawAnnotationsFromList(annotsToDraw);
-        
-        //const data = await doc.getFileData({ xfdfString });
-        //const arr = new Uint8Array(data);
-        //const blob = new Blob([arr], { type: 'application/pdf' });
-    }
-
-    const downloadAnnot = async () =>{
-        const {docViewer} = instance;
-        const annotManager = docViewer.getAnnotationManager();
-        const xfdfString = await annotManager.exportAnnotations({ widgets: true, fields: true });
-        const pdfName = pdfDocList[currentDocShow].name;
-        instance.downloadPdf({
-            filename: pdfName,
-            xfdfString,
-            includeAnnotations: true,
-            flatten: true
-        })
-    }
-*/
   const handleRemoveFile = (e) => {
     const indexFileDelete = e.currentTarget.getAttribute('data-id');
-    let currentList = [...pdfDocList];
-    if (pdfDocList.length > 1) {
-      currentList.splice(indexFileDelete, 1);
-    } else {
-      currentList = [];
-    }
-    const current =
-      +currentDocShow > +currentList.length - 1
-        ? currentDocShow - 1
-        : currentDocShow;
-    setCurrentDocShow(current);
-    setPdfDocList(currentList);
+    removeListFieldDocs(indexFileDelete);
+    editDocDispatch({
+      type: editDocAction.REMOVE_DOC,
+      payload: {
+        indexFileDelete,
+        sendDocument,
+      },
+    });
+    dispatch({
+      type: actionType.REMOVE_DOC,
+      payload: indexFileDelete,
+    });
   };
 
   const handleReloadDoc = (e) => {
-    const indexDocSelect = e.currentTarget.getAttribute('data-id');
-    if (currentDocShow !== indexDocSelect) {
-      setCurrentDocShow(indexDocSelect);
-    }
+    updateListFieldDocs(editDoc.currentDocShow);
+    editDocDispatch({
+      type: editDocAction.RELOAD_DOC,
+      payload: +e.currentTarget.getAttribute('data-id'),
+    });
+  };
+
+  const handleMailSelected = (e) => {
+    editDocDispatch({
+      type: editDocAction.MAILSELECTED_CHANGE,
+      payload: +e.target.value,
+    });
   };
 
   return (
     <div className="edit-doc-form">
       <div className="edit-field">
+        <Select
+          value={editDoc.mailSelected}
+          onChange={(e) => {
+            handleMailSelected(e);
+          }}
+          className="drop--bottom"
+          defaultSelected={editDoc.authors[editDoc.mailSelected]}
+          data={editDoc.authors}
+        />
         <div className="edit-field__items">
           <div
             className="item"
             draggable="true"
-            onDragStart={dragStart}
-            onDragEnd={(e) => dragEnd(e, TYPE.TEXT)}
+            onDragStart={(e) => {
+              dragStart(e, 'Ký tên');
+            }}
+            onDragEnd={(e) =>
+              dragEnd(
+                e,
+                TYPE.SIGN,
+                `_SIGNATURE_FOR_${
+                  editDoc.mailSelected === 0
+                    ? 'ME'
+                    : editDoc.authors[editDoc.mailSelected]
+                }`
+              )
+            }
           >
             <i
               className="fa fa-pencil fa-2x edit-field__icon"
@@ -260,85 +202,84 @@ export const EditDocForm = () => {
             />
             <span className="edit-field__text">Ký tên</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            draggable="true"
+            onDragStart={(e) => {
+              dragStart(e, 'Ngày ký');
+            }}
+            onDragEnd={(e) =>
+              dragEnd(
+                e,
+                TYPE.DATE,
+                `_DATE_FOR_${
+                  editDoc.mailSelected === 0
+                    ? 'ME'
+                    : editDoc.authors[editDoc.mailSelected]
+                }`
+              )
+            }
+          >
             <i
               className="fa fa-calendar fa-2x edit-field__icon"
               aria-hidden="true"
             />
             <span className="edit-field__text">Ngày ký</span>
           </div>
-          <div className="item">
+          <div
+            className="item"
+            draggable="true"
+            onDragStart={(e) => {
+              dragStart(e, 'Chữ');
+            }}
+            onDragEnd={(e) =>
+              dragEnd(
+                e,
+                TYPE.TEXT,
+                `_NAME_FOR_${
+                  editDoc.mailSelected === 0
+                    ? 'ME'
+                    : editDoc.authors[editDoc.mailSelected]
+                }`
+              )
+            }
+          >
             <i
               className="fa fa-font fa-2x edit-field__icon"
               aria-hidden="true"
             />
             <span className="edit-field__text">Chữ</span>
           </div>
-          <div className="item">
-            <i
-              className="fa fa-paint-brush fa-2x edit-field__icon"
-              aria-hidden="true"
-            />
-            <span className="edit-field__text">Vẽ</span>
-          </div>
-        </div>
-        <div className="edit-field__items">
-          <div className="item">
-            <i
-              className="fa fa-user fa-2x edit-field__icon"
-              aria-hidden="true"
-            />
-            <span className="edit-field__text">Tên</span>
-          </div>
-          <div className="item">
-            <i
-              className="fa fa-envelope fa-2x edit-field__icon"
-              aria-hidden="true"
-            />
-            <span className="edit-field__text">Email</span>
-          </div>
-          <div className="item">
-            <i
-              className="fa fa-building-o fa-2x edit-field__icon"
-              aria-hidden="true"
-            />
-            <span className="edit-field__text">Công ty</span>
-          </div>
-          <div className="item">
-            <i
-              className="fa fa-briefcase fa-2x edit-field__icon"
-              aria-hidden="true"
-            />
-            <span className="edit-field__text">Tiêu đề</span>
-          </div>
         </div>
       </div>
 
       <div className="edit-doc-form__preview-doc webviewer" ref={viewer} />
-      {pdfDocList.length > 0 && (
+      {sendDocument.pdfDocList.length > 0 && (
         <div className="preview-file">
-          {pdfDocList.map((item, index) => (
+          {sendDocument.pdfDocList.map((item, index) => (
             <div
-              role="button"
-              tabIndex={index}
-              data-id={index}
               className="preview-file__item"
               style={{ marginBottom: '1rem' }}
-              onClick={(e) => handleReloadDoc(e)}
             >
-              <div className="preview-file__thumbnail">
-                <img
-                  alt=""
-                  data-id={index}
-                  src={item.thumbnailData}
-                  style={{
-                    height: '100%',
-                    width: '100%',
-                    objectFit: 'contain',
-                  }}
-                />
-              </div>
-              <div className="info">
+              <div
+                data-id={index}
+                className="preview-file__header"
+                role="button"
+                tabIndex={index}
+                onClick={(e) => handleReloadDoc(e)}
+              >
+                <div className="preview-file__thumbnail">
+                  <img
+                    alt=""
+                    data-id={index}
+                    src={item.thumbnailData}
+                    style={{
+                      height: '100%',
+                      width: '100%',
+                      objectFit: 'contain',
+                    }}
+                  />
+                </div>
                 <span
                   data-id={index}
                   className="preview-file__doc-name"
@@ -346,6 +287,9 @@ export const EditDocForm = () => {
                 >
                   {item.name}
                 </span>
+              </div>
+
+              <div className="info">
                 <div className="preview-file__sub-info">
                   <span>{item.pageCount} trang</span>
                   <span

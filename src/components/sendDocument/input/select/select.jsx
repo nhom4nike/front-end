@@ -6,12 +6,14 @@ export const Select = ({
   defaultSelected,
   className,
   labelName,
+  value,
+  onChange,
   name,
   data,
 }) => {
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState({
-    value: -1,
+    value,
     text: defaultSelected,
   });
 
@@ -21,9 +23,12 @@ export const Select = ({
   const dropDownSelected = (e) => {
     setSelected({
       ...selected,
+      value: +e.target.getAttribute('data-id'),
       text: e.target.innerText,
     });
     setShow(!show);
+    e.target.value = e.target.getAttribute('value');
+    onChange(e);
   };
   return (
     <div className={`select ${className || ''}`}>
@@ -46,11 +51,14 @@ export const Select = ({
           {+data.length > 0 &&
             data.map((item, key) => (
               <div
-                className="drop-down__item"
+                className={`drop-down__item ${
+                  selected.value === key ? 'item--active' : ''
+                }`}
                 onClick={dropDownSelected}
                 role="button"
                 tabIndex={key}
                 data-id={key}
+                value={key}
               >
                 {item}
               </div>

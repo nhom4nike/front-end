@@ -10,11 +10,6 @@ import UserApi from '../api/useAPI';
 import crypt from '../contants/crypt';
 
 export default function LoginPage() {
-  useEffect(() => {
-    localStorage.setItem('isLogin', 'false');
-    localStorage.setItem('privateKey', '');
-    localStorage.setItem('publicKey', '');
-  });
   const history = useHistory();
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,7 +22,21 @@ export default function LoginPage() {
     localStorage.setItem('privateKey', `${key.privateKey}`);
     localStorage.setItem('publicKey', `${key.publicKey}`);
   };
+  useEffect(() => {
+    /* -- turn off login feature--
+    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem('email', 'nike@gmail.com');
+    handleDecryptPK(
+      '12345678zZ@',
+      'U2FsdGVkX183E5jD9xFq9pTTDZQqQLuCMCDpG9n7qC+6aYoPDlRFzva/3h1hjNFJ12PqhZtmzBCEa3lNvk2rlRUEMg556+pVkZAJqjeRP8kId67w6XQLTZc5K76zqwLS'
+    );
+    history.push('/');
+  */
 
+    localStorage.setItem('isLogin', 'false');
+    localStorage.setItem('privateKey', '');
+    localStorage.setItem('publicKey', '');
+  });
   function handleSubmitClick() {
     const fetchPostUser = async () => {
       const data = { email, password: crypt.hash(password) };
@@ -37,10 +46,12 @@ export default function LoginPage() {
         if (response.status) {
           switch (response.status) {
             case 200:
+              
               console.log(response);
               localStorage.setItem('accessToken', response.data.accessToken);
               localStorage.setItem('refreshToken', response.data.refreshToken);
               handleDecryptPK(password, response.data.user.crypt);
+              localStorage.setItem('email', response.data.user.email);
               localStorage.setItem('isLogin', 'true');
               history.push('/');
               break;

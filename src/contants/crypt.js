@@ -29,7 +29,7 @@ const crypt = {
 
   verify: (publicKey, data, signature) => {
     const hashData = CryptoJS.SHA256(data).toString();
-    const key = EC.keyFromPublic(publicKey);
+    const key = EC.keyFromPublic(publicKey, 'hex');
     return key.verify(hashData, signature);
   },
 

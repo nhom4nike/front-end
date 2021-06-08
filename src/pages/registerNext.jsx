@@ -18,6 +18,7 @@ const RegisterNext = () => {
   const [password, setPassword] = useState('');
 
   const handleGenerateKey = () => {
+
     const hashPassword = crypt.hash(password);
     const key = crypt.generateKey();
     const encrypt = crypt.encrypt(key.privateKey, password);

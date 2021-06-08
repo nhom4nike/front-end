@@ -123,6 +123,7 @@ export default function RegisterPage() {
             </Form.Item>
           </Form.Item>
 
+
           <Form.Item>
             <Button
               type="primary"

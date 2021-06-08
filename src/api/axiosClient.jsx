@@ -4,7 +4,6 @@ import queryString from 'query-string';
 
 const axiosClient = axios.create({
   baseURL: 'https://api.04-nike.tk/user',
-  // baseURL: 'http://10.10.10.2:3001',
   headers: {
     'content-type': 'application/json',
   },
