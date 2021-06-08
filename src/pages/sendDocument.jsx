@@ -1,6 +1,7 @@
 import '@/styles/sendDocument.scss';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/sendDocument/input/button/button';
 import { PeriodForm } from '@/components/sendDocument/form/periodForm/periodForm';
 import { SelectFileForm } from '@/components/sendDocument/form/selectFileForm/SelectFileForm';
@@ -12,6 +13,8 @@ import ResultSend from '@/components/sendDocument/form/resultSend/resultSend';
 import Footer from '../components/footer';
 import Header from '../components/header/header';
 
+import { pdfDocListContext } from '../contants/contexts/pdfDocListContext';
+
 const stepData = [
   'Thêm tài liệu (PDF, Word, PNG, . . .)',
   'Chọn người nhận và cài đặt',
@@ -21,22 +24,37 @@ const stepData = [
 ];
 
 export const SendDocument = () => {
+  const { updateListFieldDocs, handleSendDocument } = useContext(
+    pdfDocListContext
+  );
   const [activeStep, setActiveStep] = useState(1);
+  const history = useHistory();
   useEffect(() => {
-    setActiveStep(+localStorage.getItem('activeStepSendDoc'));
-  }, []);
+    if (activeStep === 6) {
+      history.push('/');
+    }
+  }, [activeStep]);
   const nextStep = () => {
     localStorage.setItem('activeStepSendDoc', activeStep + 1);
+    if (activeStep === 3) {
+      updateListFieldDocs(+localStorage.getItem('currentDoc'));
+    }
     setActiveStep(activeStep + 1);
   };
 
   const prevStep = () => {
     localStorage.setItem('activeStepSendDoc', activeStep + 1);
+    if (activeStep === 3) {
+      updateListFieldDocs(+localStorage.getItem('currentDoc'));
+    }
     setActiveStep(activeStep - 1);
   };
 
   const sendMail = () => {
-    setActiveStep(activeStep + 1);
+    (async () => {
+      await handleSendDocument();
+      setActiveStep(activeStep + 1);
+    })();
   };
 
   return (
@@ -79,12 +97,16 @@ export const SendDocument = () => {
             </div>
 
             <div className="right-block__control-btn">
-              {activeStep !== 1 && (
+              {activeStep !== 1 && activeStep !== 5 && (
                 <Button onClick={prevStep} className="btn--secondary">
                   Quay lại
                 </Button>
               )}
-              {activeStep !== 4 && <Button onClick={nextStep}>Tiếp tục</Button>}
+              {activeStep !== 4 && (
+                <Button onClick={nextStep}>
+                  {activeStep === 5 ? 'Kết thúc' : 'Tiếp tục'}
+                </Button>
+              )}
               {activeStep === 4 && (
                 <Button onClick={sendMail}>Gửi Email</Button>
               )}

@@ -23,19 +23,19 @@ export default function LoginPage() {
     localStorage.setItem('publicKey', `${key.publicKey}`);
   };
   useEffect(() => {
-    // -- new --
+    /* -- turn off login feature--
     localStorage.setItem('isLogin', 'true');
+    localStorage.setItem('email', 'nike@gmail.com');
     handleDecryptPK(
       '12345678zZ@',
       'U2FsdGVkX183E5jD9xFq9pTTDZQqQLuCMCDpG9n7qC+6aYoPDlRFzva/3h1hjNFJ12PqhZtmzBCEa3lNvk2rlRUEMg556+pVkZAJqjeRP8kId67w6XQLTZc5K76zqwLS'
     );
     history.push('/');
-    //
-    /*
+  */
+
     localStorage.setItem('isLogin', 'false');
     localStorage.setItem('privateKey', '');
     localStorage.setItem('publicKey', '');
-    */
   });
 
   function handleSubmitClick() {
@@ -49,6 +49,7 @@ export default function LoginPage() {
             case 200:
               handleDecryptPK(password, response.data.crypt);
               localStorage.setItem('isLogin', 'true');
+              localStorage.setItem('email', response.data.email);
               history.push('/');
               break;
             default:

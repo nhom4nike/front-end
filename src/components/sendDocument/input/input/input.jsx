@@ -19,8 +19,6 @@ export default function Input({
     setType(Type === 'password' ? 'text' : 'password');
   };
 
-  console.log(value);
-
   return (
     <div className="input">
       <div className="main-content">

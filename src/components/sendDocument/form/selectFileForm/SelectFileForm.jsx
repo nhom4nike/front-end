@@ -7,19 +7,11 @@ import { pdfDocListContext } from '../../../../contants/contexts/pdfDocListConte
 let docList = [];
 export const SelectFileForm = () => {
   const fileInputRef = useRef();
-  const { pdfDocList, setPdfDocList } = useContext(pdfDocListContext);
+  const { sendDocument, dispatch, actionType } = useContext(pdfDocListContext);
 
   const handleRefInput = () => {
     fileInputRef.current.click();
   };
-
-  const handleRemoveFile = (e) => {
-    const indexFileDelete = e.target.getAttribute('data-id');
-    const currentList = [...pdfDocList];
-    currentList.splice(indexFileDelete, 1);
-    setPdfDocList(currentList);
-  };
-
   const setThumbnail = async (dataFile, object, cb) => {
     const Object = object;
     const coreControls = window.CoreControls;
@@ -38,9 +30,16 @@ export const SelectFileForm = () => {
       },
     });
   };
+  const handleRemoveFile = (e) => {
+    dispatch({
+      type: actionType.REMOVE_DOC,
+      payload: +e.target.getAttribute('data-id'),
+    });
+  };
 
   const handleSelectFile = (e) => {
     const { files } = e.target;
+
     for (let index = 0; index < files.length; index += 1) {
       const element = files[index];
       const reader = new FileReader();
@@ -53,7 +52,10 @@ export const SelectFileForm = () => {
         setThumbnail(ev.target.result, seletedFile, (documentList) => {
           const docslist = documentList;
           if (docslist.length === files.length) {
-            setPdfDocList([...pdfDocList, ...docslist]);
+            dispatch({
+              type: actionType.ADD_DOC_LIST,
+              payload: [...docslist],
+            });
             docslist.length = 0;
           }
         });
@@ -80,9 +82,9 @@ export const SelectFileForm = () => {
         />
       </div>
 
-      {pdfDocList.length > 0 && (
+      {sendDocument.pdfDocList.length > 0 && (
         <div className="preview-file">
-          {pdfDocList.map((item, index) => (
+          {sendDocument.pdfDocList.map((item, index) => (
             <div
               data-id={index}
               className="preview-file__item"

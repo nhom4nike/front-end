@@ -9,21 +9,24 @@ import { Select } from '@/components/sendDocument/input/select/select';
 import { pdfDocListContext } from '../../../../contants/contexts/pdfDocListContext';
 
 export const SelectPartnerForm = () => {
-  const { partners, setPartners } = useContext(pdfDocListContext);
+  const { sendDocument, dispatch, actionType } = useContext(pdfDocListContext);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-
   const handleAddPartner = () => {
     if (email.length === 0) return;
-    setPartners([...partners, { name, email }]);
+    dispatch({
+      type: actionType.ADD_PARTNERS,
+      payload: { name, email },
+    });
     setEmail('');
     setName('');
   };
 
   const handleDeletePartner = (e) => {
-    const index = +e.target.getAttribute('data-id');
-    partners.splice(index, 1);
-    setPartners([...partners]);
+    dispatch({
+      type: actionType.REMOVE_PARTNER,
+      payload: +e.target.getAttribute('data-id'),
+    });
   };
 
   return (
@@ -71,37 +74,37 @@ export const SelectPartnerForm = () => {
       <div className="partner-preview">
         <p className="partner-preview__title">Danh sách người nhận</p>
         <div className="partner-preview__body">
-          {partners.length > 0 ? (
-            partners.map((partner, index) => (
-                <div className="partner">
-                  <div className="partner__avatar">
-                    <Avatar
-                      style={{
-                        backgroundColor: '#EB5757',
-                        verticalAlign: 'middle',
-                        cursor: 'pointer',
-                      }}
-                      size={48}
-                      gap={1}
-                    >
-                      B
-                    </Avatar>
-                  </div>
-                  <div className="partner__info">
-                    <p className="partner__name">{partner.name}</p>
-                    <h5 className="partner__email">{partner.email}</h5>
-                  </div>
-                  <div
-                    role="button"
-                    tabIndex="0"
-                    data-id={index}
-                    className="partner__delete-btn"
-                    onClick={handleDeletePartner}
+          {sendDocument.partners.length > 0 ? (
+            sendDocument.partners.map((partner, index) => (
+              <div className="partner">
+                <div className="partner__avatar">
+                  <Avatar
+                    style={{
+                      backgroundColor: '#EB5757',
+                      verticalAlign: 'middle',
+                      cursor: 'pointer',
+                    }}
+                    size={48}
+                    gap={1}
                   >
-                    Xóa
-                  </div>
+                    B
+                  </Avatar>
                 </div>
-              ))
+                <div className="partner__info">
+                  <p className="partner__name">{partner.name}</p>
+                  <h5 className="partner__email">{partner.email}</h5>
+                </div>
+                <div
+                  role="button"
+                  tabIndex="0"
+                  data-id={index}
+                  className="partner__delete-btn"
+                  onClick={handleDeletePartner}
+                >
+                  Xóa
+                </div>
+              </div>
+            ))
           ) : (
             <div
               style={{

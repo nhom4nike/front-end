@@ -2,6 +2,8 @@ import './style.scss';
 import React from 'react';
 import { Avatar } from 'antd';
 
+// import { pdfDocListContext } from '../../../../contants/contexts/pdfDocListContext';
+
 const ResultSend = () => (
   <div className="wrap-partner">
     <div className="partner">
