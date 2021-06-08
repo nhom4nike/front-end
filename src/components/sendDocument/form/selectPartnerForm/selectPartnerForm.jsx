@@ -1,10 +1,12 @@
 import './style.scss';
 import React, { useState, useContext } from 'react';
+
 import { Avatar } from 'antd';
 import { Button } from '@/components/sendDocument/input/button/button';
 import { Checkbox } from '@/components/sendDocument/input/checkbox/checkbox';
 import { InputWithLabel } from '@/components/sendDocument/input/inputWithLabel/inputWithLabel';
 import { Select } from '@/components/sendDocument/input/select/select';
+
 
 import { pdfDocListContext } from '../../../../contants/contexts/pdfDocListContext';
 
@@ -28,7 +30,6 @@ export const SelectPartnerForm = () => {
       payload: +e.target.getAttribute('data-id'),
     });
   };
-
   return (
     <div className="select-partner-form">
       <div className="select-partner-form__body">
@@ -37,8 +38,9 @@ export const SelectPartnerForm = () => {
           type="text"
           value={name}
           onChange={(e) => {
-            setName(e.target.value);
+          setName(e.target.value);
           }}
+
           name="partnerName"
           labelName="Tên người nhận"
           placeHolder="Nguyễn Văn A"
@@ -48,8 +50,9 @@ export const SelectPartnerForm = () => {
           type="text"
           value={email}
           onChange={(e) => {
-            setEmail(e.target.value);
+          setEmail(e.target.value);
           }}
+
           name="partnerEmail"
           labelName="Địa chỉ Email"
           placeHolder="nguyen_van_a@gmail.com"

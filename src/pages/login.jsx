@@ -37,19 +37,22 @@ export default function LoginPage() {
     localStorage.setItem('privateKey', '');
     localStorage.setItem('publicKey', '');
   });
-
   function handleSubmitClick() {
     const fetchPostUser = async () => {
-      const data = { email, hash: crypt.hash(password) };
+      const data = { email, password: crypt.hash(password) };
       try {
         const url = '/login';
         const response = await UserApi.post(url, data);
         if (response.status) {
           switch (response.status) {
             case 200:
-              handleDecryptPK(password, response.data.crypt);
+              
+              console.log(response);
+              localStorage.setItem('accessToken', response.data.accessToken);
+              localStorage.setItem('refreshToken', response.data.refreshToken);
+              handleDecryptPK(password, response.data.user.crypt);
+              localStorage.setItem('email', response.data.user.email);
               localStorage.setItem('isLogin', 'true');
-              localStorage.setItem('email', response.data.email);
               history.push('/');
               break;
             default:
